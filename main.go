@@ -30,7 +30,16 @@ func main(){
 
 	remainingTickets = remainingTickets - userTickets
 
+	// var bookings = []string{}       //slice of strings OR
+	var bookings []string
+	bookings = append(bookings, firstName + " " + lastName)
+	fmt.Printf("whole slice: %v\n", bookings)
+	fmt.Printf("first value: %v\n", bookings[0])
+	fmt.Printf("slice type: %T\n", bookings)
+	fmt.Printf("slice length: %v\n", len(bookings))
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confiramation email at %v.\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+
+	fmt.Printf("These are all the bookings: %v\n", bookings)
 
 }
