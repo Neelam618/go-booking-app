@@ -64,6 +64,13 @@ func bookTicket(firstName string, lastName string, email string, userTickets uin
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 }
 
+func sendTicket(userTickets uint, firstName string, lastName string, email string){
+	var ticket = fmt.Sprintf("%v tickets for %v %v", userTickets, firstName, lastName)
+	fmt.Println("###############")
+	fmt.Printf("Sending tickets: \n %v\n to email address %v\n", ticket, email)
+	fmt.Println("###############")
+}
+
 func main() {
 	greetUsers()
 	for { ///infinite for loop untill break
@@ -72,6 +79,7 @@ func main() {
 
 		if isValidEmail && isValidName && isValidTicketNumber {
 			bookTicket(firstName, lastName, email, userTickets)
+			sendTicket(userTickets, firstName, lastName, email)
 
 			firstNames := getFirstNames()
 			fmt.Printf("The first names of the bookings are %v\n", firstNames)
