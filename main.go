@@ -3,13 +3,19 @@ package main
 import (
 	"fmt"
 	"go-booking-app/helper"  
-	"strconv"  //import helper package/file
 )
 
 const conferenceTickets = 50
 var conferenceName = "Go Conference"
 var remainingTickets uint = 50
-var bookings = make([]map[string]string, 0)       //[{}]
+var bookings = make([]UserData, 0)       //[{}]
+
+type UserData struct {
+	firstName string
+	lastName string
+	email string
+	numberOfTickets uint
+}
 
 func greetUsers() {
 	fmt.Printf("Welcome to %v booking app\n", conferenceName)
@@ -20,7 +26,7 @@ func greetUsers() {
 func getFirstNames() []string {
 	firstNames := []string{}
 	for _, booking := range bookings { //splits slice     names = ["firstname", "lastname"]
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
@@ -45,12 +51,13 @@ func getUserInput() (string, string, string, uint) {
 func bookTicket(firstName string, lastName string, email string, userTickets uint) {
 	remainingTickets = remainingTickets - userTickets
 	//create map for user
-	var userData = make(map[string]string)  //create empty map
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)  //convert uint to string
-	
+	var userData = UserData	{
+		firstName: firstName,
+		lastName: lastName,
+		email: email,
+		numberOfTickets: userTickets,
+	}
+
 	bookings = append(bookings, userData)
 	fmt.Printf("List of bookings is %v\n", bookings )
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confiramation email at %v.\n", firstName, lastName, userTickets, email)
